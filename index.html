@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Mini App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #0088cc;
+        }
+        .user-info {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f1f1f1;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to My Telegram Mini App</h1>
+
+    <!-- Информация о пользователе будет отображаться здесь -->
+    <div class="user-info" id="userInfo">
+        Loading user info...
+    </div>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        // Инициализация Telegram Web App
+        const tg = window.Telegram.WebApp;
+
+        // Ожидаем загрузки WebApp
+        tg.ready();
+
+        // Получаем информацию о пользователе
+        const userInfo = tg.initDataUnsafe;
+
+        // Отображаем информацию о пользователе
+        const userInfoDiv = document.getElementById("userInfo");
+        userInfoDiv.innerHTML = `
+            <strong>User ID:</strong> ${userInfo.user.id} <br>
+            <strong>Username:</strong> ${userInfo.user.username} <br>
+            <strong>First Name:</strong> ${userInfo.user.first_name} <br>
+            <strong>Last Name:</strong> ${userInfo.user.last_name || 'N/A'} <br>
+            <strong>Language:</strong> ${userInfo.user.language_code} <br>
+        `;
+    </script>
+
+</body>
+</html>
